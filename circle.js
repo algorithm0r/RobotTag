@@ -11,7 +11,7 @@ class Circle {
 
         this.player = 1;
         this.visualRadius = 200;
-        this.colors = ["Red", "Green", "Blue", "White"];
+        this.colors = ["Red", "White"];
         this.setNotIt();
 
         this.velocity = { x: Math.random() * 1000 - 500, y: Math.random() * 1000 - 500 };
@@ -37,7 +37,7 @@ class Circle {
 
     setNotIt() {
         this.it = false;
-        this.color = 3;
+        this.color = 1;
         this.visualRadius = 200;
         this.maxSpeed = 200;
     };
@@ -139,10 +139,20 @@ class Circle {
 
     draw(ctx) {
         ctx.beginPath();
+        ctx.setLineDash([]);
         ctx.fillStyle = this.colors[this.color];
         ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
         ctx.fill();
         ctx.closePath();
+
+        if (document.getElementById("visual").checked) {
+            ctx.beginPath();
+            ctx.setLineDash([5, 5]);
+            ctx.strokeStyle = this.colors[this.color];
+            ctx.arc(this.x, this.y, this.visualRadius, 0, Math.PI * 2, false);
+            ctx.stroke();
+            ctx.closePath();
+        }
     };
 
 };
