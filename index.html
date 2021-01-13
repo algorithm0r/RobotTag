@@ -6,9 +6,17 @@
     <title>Robot Tag</title>
     <script type="text/javascript" src="./assetmanager.js"></script>
     <script type="text/javascript" src="./gameengine.js"></script>
+    <script type="text/javascript" src="./timer.js"></script>
+    <script type="text/javascript" src="./util.js"></script>
+    <script type="text/javascript" src="./circle.js"></script>
     <script type="text/javascript" src="./main.js"></script>
 </head>
 <body>
     <canvas id="gameWorld" width="800" height="800" style="border: 1px solid white; background: black"></canvas>
+    <div>
+        <input type="range" id="friction" name="friction"
+               min="0" max="1" value="1" step="0.05">
+        <label for="friction">Friction</label>
+    </div>
 </body>
 </html>
