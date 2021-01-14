@@ -7,11 +7,11 @@ class Circle {
 
         this.friction = 1;
         this.acceleration = 1000000;
-        this.maxSpeed = 200;
+        this.maxSpeed = 0;
 
-        this.player = 1;
-        this.visualRadius = 200;
+        this.visualRadius = 0;
         this.colors = ["Red", "White"];
+
         this.setNotIt();
 
         this.velocity = { x: Math.random() * 1000 - 500, y: Math.random() * 1000 - 500 };
@@ -30,16 +30,12 @@ class Circle {
     setIt() {
         this.it = true;
         this.color = 0;
-        this.visualRadius = 500;
-        this.maxSpeed = 250;
         this.paused = 1;
     };
 
     setNotIt() {
         this.it = false;
         this.color = 1;
-        this.visualRadius = 200;
-        this.maxSpeed = 200;
     };
 
     collide(other) {
@@ -64,6 +60,14 @@ class Circle {
 
     update() {
         this.friction = document.getElementById("friction").value;
+        if (this.it) {
+            this.visualRadius = document.getElementById("itradius").value;
+            this.maxSpeed = document.getElementById("itspeed").value;
+        } else {
+            this.visualRadius = document.getElementById("notradius").value;
+            this.maxSpeed = document.getElementById("notspeed").value;
+        }
+
         if (this.paused > 0) {
             this.paused -= this.game.clockTick;
         } else {
@@ -89,6 +93,8 @@ class Circle {
             for (var i = 0; i < this.game.entities.length; i++) {
                 var ent = this.game.entities[i];
                 if (ent !== this && this.collide(ent)) {
+
+                    // push away from each other
                     var dist = distance(this, ent);
                     var delta = this.radius + ent.radius - dist;
                     var difX = (this.x - ent.x) / dist;
@@ -115,13 +121,13 @@ class Circle {
 
                 if (ent != this && this.collide({ x: ent.x, y: ent.y, radius: this.visualRadius })) {
                     var dist = distance(this, ent);
-                    if (this.it && dist > this.radius + ent.radius + 10) {
+                    if (this.it) {
                         var difX = (ent.x - this.x) / dist;
                         var difY = (ent.y - this.y) / dist;
                         this.velocity.x += difX * this.acceleration / (dist * dist);
                         this.velocity.y += difY * this.acceleration / (dist * dist);
                     }
-                    if (ent.it && dist > this.radius + ent.radius) {
+                    if (ent.it) {
                         var difX = (ent.x - this.x) / dist;
                         var difY = (ent.y - this.y) / dist;
                         this.velocity.x -= difX * this.acceleration / (dist * dist);

@@ -19,9 +19,27 @@
         <label for="friction">Friction</label>
     </div>
     <div>
-        <input type="checkbox" id="visual" name="visual"
-               >
-        <label for="friction">Draw Visual Radius</label>
+        <input type="checkbox" id="visual" name="visual">
+        <label for="visual">Draw Visual Radius</label>
+    </div>
+    <div>
+        It<br />
+        <input type="range" id="itspeed" name="itspeed"
+               min="10" max="250" value="250" step="10">
+        <label for="itspeed">Maximum Speed</label>
+        <input type="range" id="itradius" name="itradius"
+               min="10" max="500" value="500" step="10">
+        <label for="itradius">Visual Radius</label>
+    </div>   
+    <div>
+        Not It<br />
+        <input type="range" id="notspeed" name="notspeed"
+               min="10" max="250" value="200" step="10">
+        <label for="notspeed">Maximum Speed</label>
+        <input type="range" id="notradius" name="notradius"
+               min="10" max="500" value="200" step="10">
+        <label for="notradius">Visual Radius</label>
+
     </div>
 </body>
 </html>
